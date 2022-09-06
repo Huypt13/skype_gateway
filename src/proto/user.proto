@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package user;
+service UserService {
+    rpc Create(CreateUser) returns (User){};
+    rpc VerifyUser(ActiveCode) returns (User){};
+    rpc Search(SearchInfor) returns (ListSearchInfor){};
+    rpc GetUser(Token) returns (User){};
+    rpc Login(LoginUser) returns(Token){};
+    rpc GetById(Id) returns (User){}
+}
+
+message Id {
+    string id=1;
+}
+message SearchInfor {
+    string value=1;
+    string _id=2;
+}
+
+message ListSearchInfor {
+    repeated User searchByEmail =1;
+    repeated User searchByName =2;
+ }
+message LoginUser{
+    string email=1;
+    string password=2;
+}
+
+message Token{
+    string token=1;
+}
+message ActiveCode {
+    string activeCode=1;
+}
+
+
+message CreateUser {
+    string email=1;
+    string password=2;
+    string name=3;
+}
+
+message User {
+    string _id=1;
+    string email=2;
+    string password=3;
+    string name=4;
+    bool active=5;
+    string activeCode=6;
+    string avatar=7;
+}
